@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { BenefitComparison } from '../components/BenefitComparison';
 
 const PageContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
@@ -123,6 +124,7 @@ export const Benefits = () => {
   return (
     <PageContainer>
       <Title>Available Benefits</Title>
+      <BenefitComparison />
       <BenefitsGrid>
         {benefits.map((benefit) => (
           <BenefitCard key={benefit.id}>

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 const HeaderContainer = styled.header`
   background-color: ${({ theme }) => theme.colors.primary};
@@ -25,6 +27,7 @@ const Logo = styled(Link)`
 const NavLinks = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.md};
+  align-items: center;
 `;
 
 const NavLink = styled(Link)`
@@ -40,14 +43,18 @@ const NavLink = styled(Link)`
 `;
 
 export const Header = () => {
+  const { translations } = useLanguage();
+
   return (
     <HeaderContainer>
       <Nav>
-        <Logo to="/">SG Benefits Assist</Logo>
+        <Logo to="/">{translations.common.appName}</Logo>
         <NavLinks>
-          <NavLink to="/benefits">Benefits</NavLink>
-          <NavLink to="/eligibility">Eligibility</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/benefits">{translations.nav.benefits}</NavLink>
+          <NavLink to="/eligibility">{translations.nav.eligibility}</NavLink>
+          <NavLink to="/contact">{translations.nav.contact}</NavLink>
+          <NavLink to="/faq">{translations.nav.faq}</NavLink>
+          <LanguageSelector />
         </NavLinks>
       </Nav>
     </HeaderContainer>

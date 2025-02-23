@@ -5,6 +5,11 @@ import { Benefits } from './pages/Benefits';
 import { Eligibility } from './pages/Eligibility';
 import { Contact } from './pages/Contact';
 import { Home } from './pages/Home';
+import { FAQ } from './pages/FAQ';
+import { LanguageProvider } from './contexts/LanguageContext';
+import { AccessibilityProvider } from './contexts/AccessibilityContext';
+import { AccessibilityControls } from './components/AccessibilityControls';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -30,20 +35,28 @@ const MainContent = styled.main`
 
 function App() {
   return (
-    <Router>
-      <AppContainer>
-        <Header />
-        <MainContent>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/benefits" element={<Benefits />} />
-            <Route path="/eligibility" element={<Eligibility />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </MainContent>
-      </AppContainer>
-    </Router>
+    <ErrorBoundary>
+      <LanguageProvider>
+        <AccessibilityProvider>
+          <Router>
+            <AppContainer>
+              <Header />
+              <MainContent>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/benefits" element={<Benefits />} />
+                  <Route path="/eligibility" element={<Eligibility />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="*" element={<Home />} />
+                </Routes>
+              </MainContent>
+              <AccessibilityControls />
+            </AppContainer>
+          </Router>
+        </AccessibilityProvider>
+      </LanguageProvider>
+    </ErrorBoundary>
   );
 }
 
